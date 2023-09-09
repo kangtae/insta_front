@@ -29,6 +29,7 @@ export const SignUpItem = (props: Props) => {
 			})}
 		</li>
 	}
+	/*push test*/
 	return <li>
 		<h2>{title}</h2>
 		<CommonInput

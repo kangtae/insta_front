@@ -1,20 +1,29 @@
+"use client";
+import {useState} from "react";
 
 type Props= {
 	inputKey: string,
 	inputType: string,
 	placeholder: string,
 	handleChange: (key: string, value: string) => void;
+	defaultValue: string,
 }
 
-
-export default function commonInput(props: Props) {
-	const {inputType,  placeholder, handleChange, inputKey} = props;
-	console.log("key",inputKey)
+export default function CommonRadio(props: Props) {
+	const {value,  name, handleChange, inputKey, defaultValue} = props;
+	const handleChangeEvent = (e) => {
+		const selectedValue = e.target.value;
+		handleChange(inputKey,selectedValue)
+	}
 	return <>
-		<input type={inputType}
-		       className="text-black"
-		       placeholder={placeholder}
-		       onChange={(e)=>handleChange(inputKey,e.target.value)}
-		/>
+		<label>
+			<input type="radio"
+			       className="text-black"
+			       value={value}
+			       checked={value === defaultValue}
+			       onChange={(e)=>handleChangeEvent(e)}
+			/>
+			{name}
+		</label>
 	</>;
 }

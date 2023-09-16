@@ -1,7 +1,7 @@
 "use client"; // This is a client component 👈🏽
 import {SIGNGUP_STATUS} from "./constants"
 import {useState} from "react";
-import {SignUpItem} from "@/app/components/SignUpItem";
+import {SignUpItem} from "@/components/SignUpItem";
 import axios from "axios";
 export default function SignIn(){
 	const [info, setInfo] = useState({

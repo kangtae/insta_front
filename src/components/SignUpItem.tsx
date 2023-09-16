@@ -1,6 +1,6 @@
 import React from 'react';
-import CommonInput from "@/app/components/CommonInput";
-import CommonRadio from "@/app/components/CommonRadio";
+import CommonInput from "@/components/CommonInput";
+import CommonRadio from "@/components/CommonRadio";
 
 type Props= {
 	handleChange: (key: string, value: string) => void;
@@ -29,7 +29,6 @@ export const SignUpItem = (props: Props) => {
 			})}
 		</li>
 	}
-	/*push test2*/
 	return <li>
 		<h2>{title}</h2>
 		<CommonInput

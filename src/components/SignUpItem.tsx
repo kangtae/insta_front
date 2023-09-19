@@ -10,16 +10,15 @@ type Props= {
 	inputKey: string,
 	type: string,
 	info: {},
-	key: number
 }
 export const SignUpItem = (props: Props) => {
-	const {handleChange, title ,type, inputKey, placeholder, options, info } = props;
+	const {handleChange, title ,type, inputKey, placeholder, options, info, key } = props;
 	if(type === "radio"){
 		return <li>
 			<h2>{title}</h2>
 			{options.map(item => {
 				return <CommonRadio
-					Key={item.id}
+					key={item.id}
 					inputKey={inputKey}
 					name={item.name}
 					defaultValue={info.gender}
@@ -30,7 +29,7 @@ export const SignUpItem = (props: Props) => {
 		</li>
 	}
 	return <li>
-		<h2>{title}</h2>
+		<h2>{title}22</h2>
 		<CommonInput
 			inputKey={inputKey}
 			inputType={type}

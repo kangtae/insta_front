@@ -3,6 +3,7 @@ import {SIGNGUP_STATUS} from "./constants"
 import {useState} from "react";
 import {SignUpItem} from "@/components/SignUpItem";
 import axios from "axios";
+import CommonModal from "@/components/CommonModal";
 export default function SignIn(){
 	const [info, setInfo] = useState({
 		name: "",
@@ -24,7 +25,7 @@ export default function SignIn(){
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post('http://localhost:8080/member/join', info , {
+			const response = await axios.post('http://localhost:3000/member/join', info , {
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -34,20 +35,22 @@ export default function SignIn(){
 		}
 	}
 	return <div>
+		<CommonModal/>
 		<h1>회원가입</h1>
 		<form onSubmit={handleSubmit}>
 			{SIGNGUP_STATUS.list && <ul>
 				{SIGNGUP_STATUS.list.map((item,idx) => {
-					return <SignUpItem
-						key={idx}
-						title={item.title}
-						inputKey={ item.key}
-						type={item.type}
-						placeholder={item?.placeholder || ""}
-						options={item?.options || []}
-						info={info}
-						handleChange={handleChange}
-					/>
+					return <div key={`id_${idx}`} >
+						<SignUpItem
+							title={item.title}
+							inputKey={ item.key}
+							type={item.type}
+							placeholder={item?.placeholder || ""}
+							options={item?.options || []}
+							info={info}
+							handleChange={handleChange}
+						/>
+					</div>
 				})}
 			</ul>}
 			<button type="submit">가입하기</button>

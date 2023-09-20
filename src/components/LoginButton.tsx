@@ -1,4 +1,4 @@
-interface LoginButtonProps {
+interface ILoginButtonProps {
     buttonType: "button" | "submit";
     buttonText: string;
     customStyle?: string;
@@ -8,7 +8,7 @@ export default function LoginButton({
     buttonType,
     buttonText,
     customStyle,
-}: LoginButtonProps) {
+}: ILoginButtonProps) {
     return (
         <>
             <button

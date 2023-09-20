@@ -1,8 +1,10 @@
-interface LoginInputProps {
+import { ChangeEvent } from "react";
+
+interface ILoginInputProps {
     inputType: string;
     placeholder: string;
     customStyle?: string;
-    handleChange: any;
+    handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function LoginInput({
@@ -10,7 +12,7 @@ export default function LoginInput({
     placeholder,
     customStyle,
     handleChange,
-}: LoginInputProps) {
+}: ILoginInputProps) {
     return (
         <>
             <input

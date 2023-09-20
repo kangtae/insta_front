@@ -1,11 +1,12 @@
+import { ChangeEvent } from "react";
 import LoginInput from "./LoginInput";
 
-interface LoginItemProps {
+interface ILoginItemProps {
     label: string;
     inputType: string;
     placeholder: string;
     customStyle?: string;
-    handleChange: any;
+    handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function LoginItem({
@@ -14,7 +15,7 @@ export default function LoginItem({
     placeholder,
     customStyle,
     handleChange,
-}: LoginItemProps) {
+}: ILoginItemProps) {
     return (
         <>
             <div className="mt-3 first:mt-0">

@@ -2,17 +2,18 @@ import React from 'react';
 import CommonInput from "@/components/CommonInput";
 import CommonRadio from "@/components/CommonRadio";
 
-type Props= {
+interface Props {
 	handleChange: (key: string, value: string) => void;
-	title: string,
-	options: [],
-	placeholder: string,
-	inputKey: string,
-	type: string,
-	info: {},
+	title: string;
+	options: [];
+	placeholder: string;
+	inputKey: string;
+	type: string;
+	info: {};
+	customStyle?: string;
 }
 export const SignUpItem = (props: Props) => {
-	const {handleChange, title ,type, inputKey, placeholder, options, info, key } = props;
+	const {handleChange, title ,type, inputKey, placeholder, options, info, customStyle } = props;
 	if(type === "radio"){
 		return <li>
 			<h2>{title}</h2>
@@ -24,17 +25,19 @@ export const SignUpItem = (props: Props) => {
 					defaultValue={info.gender}
 					value={item.value}
 					handleChange={handleChange}
+
 				/>
 			})}
 		</li>
 	}
 	return <li>
-		<h2>{title}22</h2>
+		<h2>{title}</h2>
 		<CommonInput
 			inputKey={inputKey}
 			inputType={type}
 			placeholder={placeholder}
 			handleChange={handleChange}
+			customStyle={`w-full h-8 mt-2 px-3 border border-[#ebebeb] ${customStyle}`}
 		/>
 		{inputKey === "id" && <span>중복 확인</span>}
 	</li>

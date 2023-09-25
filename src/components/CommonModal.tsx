@@ -10,7 +10,7 @@ import axiosInstance from "@/lib/axiosInstance";
 }*/
 
 
-export default function CommonModal() {
+export default function CommonModal({customStyle}) {
 	const [id, setId] = useState("");
 	const handleChange = (value : string) => {
 		setId(value);
@@ -29,6 +29,8 @@ export default function CommonModal() {
 				<CommonInput
 					inputType={"text"}
 					handleChange={handleChange}
+					placeholder={"아이디를 입력해주세요."}
+					customStyle={`w-full h-8 mt-2 px-3 border border-[#ebebeb] ${customStyle}`}
 				/>
 			</div>
 			<button type="button">중복확인</button>

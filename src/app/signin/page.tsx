@@ -2,8 +2,8 @@
 import {SIGNGUP_STATUS} from "./constants"
 import {useState} from "react";
 import {SignUpItem} from "@/components/SignUpItem";
-import axios from "axios";
 import CommonModal from "@/components/CommonModal";
+import axiosInstance from "@/lib/axiosInstance";
 export default function SignIn(){
 	const [info, setInfo] = useState({
 		name: "",
@@ -25,11 +25,8 @@ export default function SignIn(){
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post('http://localhost:3000/member/join', info , {
-				headers: {
-					"Content-Type": "application/json"
-				}
-			});
+			const response = axiosInstance.post("/member/join", info );
+			console.log("response",response);
 		}catch(error){
 			console.log(error);
 		}

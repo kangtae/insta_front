@@ -1,37 +1,39 @@
+
+
 const SIGNGUP_STATUS = {
 	list: [
 		{
 			id: 1,
 			title : "이름",
-			key: "name",
+			key: "userName",
 			type: "text",
 			placeholder: "이름을 입력해주세요"
 		},
 		{
 			id: 2,
 			title : "아이디",
-			key: "id",
+			key: "userId",
 			type: "text",
-			placeholder: "이름을 입력해주세요"
+			placeholder: "아이디를 입력해주세요"
 		},
 		{
 			id: 3,
 			title : "패스워드",
-			key: "pw",
+			key: "password",
 			type: "text",
-			placeholder: "이름을 입력해주세요"
+			placeholder: "패스워드를 입력해주세요"
 		},
 		{
 			id: 4,
 			title : "휴대폰 번호",
-			key: "tel",
+			key: "userPhone",
 			type: "text",
-			placeholder: "이름을 입력해주세요"
+			placeholder: "휴대폰번호를 입력해주세요"
 		},
 		{
 			id: 5,
 			title : "성별",
-			key: "gender",
+			key: "sex",
 			type: "radio",
 			options:[{
 				id:"1",
@@ -47,23 +49,23 @@ const SIGNGUP_STATUS = {
 		{
 			id: 6,
 			title : "생년 월일",
-			key: "birthday",
+			key: "birthDay",
 			type: "text",
-			placeholder: "이름을 입력해주세요"
+			placeholder: "생년월일을 입력해주세요"
 		},
 		{
 			id: 7,
 			title : "주소",
 			key: "address",
 			type: "text",
-			placeholder: "이름을 입력해주세요"
+			placeholder: "주소를 입력해주세요"
 		},
 		{
 			id: 8,
 			title : "이메일",
 			key: "email",
 			type: "text",
-			placeholder: "이름을 입력해주세요"
+			placeholder: "이메일을 입력해주세요"
 		},
 	],
 }

@@ -1,22 +1,22 @@
+"use client";
+
 import CommonInput from "@/components/CommonInput";
 import { useState } from "react";
-import axiosInstance from "@/lib/axiosInstance";
+import {getMemberCheck} from "@/app/signin/lib/api";
 
 export default function CommonModal({ customStyle }: { customStyle: string }) {
 	const [id, setId] = useState<string>(""); // id 상태를 문자열로 설정
 
-	const handleChange = (value: string) => {
+	const handleChange = (key:string,value : string) => {
 		setId(value);
 	}
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-
 		try {
-			const response = await axiosInstance.get("/member/check", { params: { userId: id } });
-			console.log("response", response);
+			await getMemberCheck(id);
 		} catch (error) {
-			console.log(error);
+			console.log("error",error);
 		}
 	}
 

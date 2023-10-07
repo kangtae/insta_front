@@ -3,11 +3,11 @@ import {SIGNGUP_STATUS} from "./constants"
 import {useState} from "react";
 import {SignUpItem} from "@/components/SignUpItem";
 import CommonModal from "@/components/CommonModal";
-import axiosInstance from "@/lib/axiosInstance";
+import { postJoin } from "./lib/api"
 export default function SignIn(){
 	const [info, setInfo] = useState({
 		name: "",
-		id: "",
+		userId:"",
 		pw: "",
 		tel: "",
 		gender: "M",
@@ -25,8 +25,7 @@ export default function SignIn(){
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		try {
-			const response = axiosInstance.post("/member/join", info );
-			console.log("response",response);
+			await postJoin(info)
 		}catch(error){
 			console.log(error);
 		}
@@ -34,6 +33,7 @@ export default function SignIn(){
 	return <div>
 		<CommonModal/>
 		<h1>회원가입</h1>
+
 		<form onSubmit={handleSubmit}>
 			{SIGNGUP_STATUS.list && <ul>
 				{SIGNGUP_STATUS.list.map((item,idx) => {

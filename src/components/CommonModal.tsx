@@ -4,9 +4,20 @@ import CommonInput from "@/components/CommonInput";
 import { useState } from "react";
 import {getMemberCheck} from "@/app/signin/lib/api";
 
-export default function CommonModal({ customStyle }: { customStyle: string }) {
-	const [id, setId] = useState<string>(""); // id 상태를 문자열로 설정
+/*interface Props {
+	customStyle: string;
+	toggleModal: (value:boolean) => void;
+}*/
 
+
+export default function CommonModal({ customStyle,toggleModal,inputHandleChange }: {
+	customStyle: string;
+	toggleModal: (value:boolean) => void;
+	inputHandleChange: (key: string, value: string) => void;
+}) {
+	const [id, setId] = useState<string>(""); // id 상태를 문자열로 설정
+	const [isMemberCheck, setIsMemberCheck] = useState<boolean>(false);
+	const [message, setMessage] = useState<string>("")
 	const handleChange = (key:string,value : string) => {
 		setId(value);
 	}
@@ -14,14 +25,38 @@ export default function CommonModal({ customStyle }: { customStyle: string }) {
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		try {
-			await getMemberCheck(id);
+			const res = await getMemberCheck(id);
+			if(res.message === "success"){
+				!isMemberCheck && setIsMemberCheck(true);
+				setMessage("사용가능한 아이디입니다.")
+				return undefined;
+			}
+			setMessage("사용불가능한 아이디입니다.")
 		} catch (error) {
-			console.log("error",error);
+
 		}
 	}
 
+	const closeModal= () => {
+		toggleModal(false)
+		inputHandleChange("userId",id);
+	}
+
+	const renderDescription = () => {
+		console.log("isMemberCheck",isMemberCheck);
+		if(isMemberCheck){
+			return <>
+				사용가능한 아이디입니다.
+				<button type="button" onClick={closeModal}>사용하기</button>
+			</>
+		}
+		return <>
+			사용불가능한 아이디입니다.
+		</>
+	}
+
 	return (
-		<>
+		<div className="border-solid border-2 border-sky-500">
 			<h3>아이디 중복확인</h3>
 			<form onSubmit={handleSubmit}> {/* form 태그를 사용하여 submit 이벤트를 처리 */}
 				<div>
@@ -37,7 +72,9 @@ export default function CommonModal({ customStyle }: { customStyle: string }) {
 				</div>
 				<button type="submit">중복확인</button> {/* submit 버튼으로 변경 */}
 			</form>
-			{id && <div>사용가능한 아이디입니다. <button>사용하기</button></div>} {/* id가 있을 때만 표시 */}
-		</>
+			{isMemberCheck && message === "사용가능한 아이디입니다."
+				? <>{message} <button type="button" onClick={closeModal}>사용하기</button></>
+				: message}
+		</div>
 	);
 }

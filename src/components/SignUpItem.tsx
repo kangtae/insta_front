@@ -10,10 +10,11 @@ interface Props {
 	inputKey: string;
 	type: string;
 	info: {};
+	toggleModal: (value:boolean) => void;
 	customStyle?: string;
 }
 export const SignUpItem = (props: Props) => {
-	const {handleChange, title ,type, inputKey, placeholder, options, info, customStyle } = props;
+	const {handleChange, title ,type, inputKey, placeholder, options, info, customStyle, toggleModal} = props;
 	if(type === "radio"){
 		return <li>
 			<h2>{title}</h2>
@@ -25,7 +26,6 @@ export const SignUpItem = (props: Props) => {
 					defaultValue={info.gender}
 					value={item.value}
 					handleChange={handleChange}
-
 				/>
 			})}
 		</li>
@@ -37,9 +37,13 @@ export const SignUpItem = (props: Props) => {
 			inputType={type}
 			placeholder={placeholder}
 			handleChange={handleChange}
+			value={info[inputKey]}
 			customStyle={`w-full h-8 mt-2 px-3 border border-[#ebebeb] ${customStyle}`}
+			disabled={inputKey === "userId" ? true : false}
 		/>
-		{inputKey === "id" && <span>중복 확인</span>}
+		{inputKey === "userId" && <span onClick={
+			()=>toggleModal(true)
+		}>중복 확인</span>}
 	</li>
 }
 

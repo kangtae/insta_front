@@ -3,9 +3,11 @@ import {SIGNGUP_STATUS} from "./constants"
 import {useState} from "react";
 import {SignUpItem} from "@/components/SignUpItem";
 import CommonModal from "@/components/CommonModal";
-import { postJoin } from "./lib/api"
+import { postJoin } from "./lib/api";
+import {IjoinInfo} from "@/app/signin/lib/types";
+
 export default function SignIn(){
-	const [info, setInfo] = useState({
+	const [info, setInfo] = useState<IjoinInfo>({
 		name: "",
 		userId:"",
 		pw: "",
@@ -15,7 +17,13 @@ export default function SignIn(){
 		address: "",
 		email: "",
 	});
+	const [isModalOpen, setIsModalOpen] =useState<boolean>(false)
+
+	const toggleModal = (value : boolean) => {
+		setIsModalOpen(value)
+	}
 	const handleChange = (key:string,value : string) => {
+		console.log("2222",key,value)
 		setInfo(prevInfo => ({
 			...prevInfo,
 			[key]: value
@@ -31,7 +39,10 @@ export default function SignIn(){
 		}
 	}
 	return <div>
-		<CommonModal/>
+		{isModalOpen && <CommonModal
+			toggleModal={toggleModal}
+			inputHandleChange={handleChange}
+		/>}
 		<h1>회원가입</h1>
 
 		<form onSubmit={handleSubmit}>
@@ -44,7 +55,8 @@ export default function SignIn(){
 							type={item.type}
 							placeholder={item?.placeholder || ""}
 							options={item?.options || []}
-							info={info}
+							info={info}g
+							toggleModal={toggleModal}
 							handleChange={handleChange}
 						/>
 					</div>

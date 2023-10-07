@@ -1,14 +1,5 @@
-interface IpostJoin {
-	name: string
-	userId:string
-	pw: string
-	tel: string
-	gender: string
-	birthday: string
-	address: string
-	email: string
-}
-export async function  postJoin(info : IpostJoin){
+import { IjoinInfo } from "./types"
+export async function  postJoin(info : IjoinInfo){
 	const response = await fetch("/member/join", {
 		method:"POST",
 		headers: {

@@ -23,7 +23,7 @@ export default function LoginItem({
                 <LoginInput
                     inputType={inputType}
                     placeholder={placeholder}
-                    customStyle={`w-full h-8 mt-2 px-3 border border-[#ebebeb] ${customStyle}`}
+                    customStyle={`w-full mt-2 px-3 ${customStyle}`}
                     handleChange={handleChange}
                 />
             </div>

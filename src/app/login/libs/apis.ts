@@ -1,7 +1,4 @@
-interface ILoginInfo {
-    userId: string;
-    password: string;
-}
+import { ILoginInfo } from "./types";
 
 export async function login(loginInfo: ILoginInfo) {
     const res = await fetch("/member/login", {

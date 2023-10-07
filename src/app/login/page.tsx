@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import type { ChangeEvent } from "react";
+import { Divider } from "antd";
 
 import LoginButton from "@/components/LoginButton";
 import LoginItem from "@/components/LoginItem";
 
 import { login } from "./libs/apis";
+import { ILoginInfo } from "./libs/types";
 
 export default function LoginPage() {
-    const [loginInfo, setLoginInfo] = useState({
+    const [loginInfo, setLoginInfo] = useState<ILoginInfo>({
         userId: "",
         password: "",
     });
@@ -53,9 +55,26 @@ export default function LoginPage() {
                     <LoginButton
                         buttonType="submit"
                         buttonText="로그인"
-                        customStyle="mt-4"
+                        customStyle="mt-4 bg-indigo-500"
                     />
                 </form>
+                <Divider />
+
+                <LoginButton
+                    buttonType="button"
+                    buttonText="카카오 로그인"
+                    customStyle="bg-yellow-300 text-black"
+                />
+                <LoginButton
+                    buttonType="button"
+                    buttonText="네이버 로그인"
+                    customStyle="mt-2 bg-green-500"
+                />
+                <LoginButton
+                    buttonType="button"
+                    buttonText="Google 로그인"
+                    customStyle="mt-2 bg-red-600"
+                />
             </div>
         </>
     );

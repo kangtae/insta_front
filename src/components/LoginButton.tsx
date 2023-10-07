@@ -1,3 +1,5 @@
+import { Button } from "antd";
+
 interface ILoginButtonProps {
     buttonType: "button" | "submit";
     buttonText: string;
@@ -11,12 +13,14 @@ export default function LoginButton({
 }: ILoginButtonProps) {
     return (
         <>
-            <button
-                type={buttonType}
-                className={`w-full h-9 bg-slate-600 text-white ${customStyle}`}
+            <Button
+                htmlType={buttonType}
+                type="primary"
+                size="large"
+                className={`w-full ${customStyle}`}
             >
                 {buttonText}
-            </button>
+            </Button>
         </>
     );
 }

@@ -1,3 +1,4 @@
+import { Input } from "antd";
 import { ChangeEvent } from "react";
 
 interface ILoginInputProps {
@@ -15,7 +16,7 @@ export default function LoginInput({
 }: ILoginInputProps) {
     return (
         <>
-            <input
+            <Input
                 type={inputType}
                 placeholder={placeholder}
                 className={customStyle}

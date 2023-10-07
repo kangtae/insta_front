@@ -5,11 +5,12 @@ import type { ChangeEvent } from "react";
 
 import LoginButton from "@/components/LoginButton";
 import LoginItem from "@/components/LoginItem";
-import axios from "axios";
+
+import { login } from "./libs/apis";
 
 export default function LoginPage() {
     const [loginInfo, setLoginInfo] = useState({
-        id: "",
+        userId: "",
         password: "",
     });
 
@@ -18,11 +19,7 @@ export default function LoginPage() {
         try {
             console.log(loginInfo);
 
-            const result = await axios.post(
-                "http://localhost:3000/member/login",
-                loginInfo
-            );
-
+            const result = await login(loginInfo);
             console.log(result);
         } catch (error) {
             console.log(error);
@@ -45,7 +42,7 @@ export default function LoginPage() {
                         label="아이디&휴대폰 번호"
                         inputType="text"
                         placeholder="아이디를 입력하시기 바랍니다"
-                        handleChange={handleChange("id")}
+                        handleChange={handleChange("userId")}
                     />
                     <LoginItem
                         label="비밀번호"

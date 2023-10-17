@@ -1,6 +1,10 @@
+import Nav from "@/components/Nav";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
+import Link from "next/link";
+import Sidebar from "@/components/Sidebar";
+import BottomNav from "@/components/BottomNav";
 
 const sans = Open_Sans({ subsets: ["latin"] });
 
@@ -16,7 +20,21 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={sans.className}>
-            <body>{children}</body>
+            <body>
+                <div className="flex justify-between">
+                    <div className="flex flex-col justify-between w-1/4 h-screen p-3">
+                        <div>
+                            <h1 className="text-2xl font-bold">
+                                <Link href="/">REDET</Link>
+                            </h1>
+                            <Nav />
+                        </div>
+                        <BottomNav />
+                    </div>
+                    <div className="w-full">{children}</div>
+                    <Sidebar />
+                </div>
+            </body>
         </html>
     );
 }

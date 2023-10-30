@@ -1,6 +1,7 @@
 import { IjoinInfo } from "./types"
+
 export async function  postJoin(info : IjoinInfo){
-	const response = await fetch("/member/join", {
+	const response = await fetch(`/member/join`, {
 		method:"POST",
 		headers: {
 			"Content-Type": "application/json",

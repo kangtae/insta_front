@@ -1,6 +1,6 @@
 "use client"; // This is a client component 👈🏽
 import {SIGNGUP_STATUS} from "./constants"
-import {useState} from "react";
+import React, {useState} from "react";
 import {SignUpItem} from "@/components/SignUpItem";
 import CommonModal from "@/components/CommonModal";
 import { postJoin } from "./lib/api";
@@ -30,7 +30,7 @@ export default function SignIn(){
 		}));
 	}
 
-	const handleSubmit = async (e: any) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
 			await postJoin(info)

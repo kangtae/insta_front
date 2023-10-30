@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const domain = process.env.NEXT_PUBLIC_DOMAIN
 const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
@@ -6,7 +7,7 @@ const nextConfig = {
 		return [
 			{
 				source: "/:path*",
-				destination: "http://localhost:8080/:path*",
+				destination: `${domain}/:path*`,
 			},
 		];
 	},

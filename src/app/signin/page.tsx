@@ -13,7 +13,7 @@ export default function SignIn(){
 		pw: "",
 		tel: "",
 		gender: "M",
-		birthday: "",
+		birthDay: "",
 		address: "",
 		email: "",
 	});

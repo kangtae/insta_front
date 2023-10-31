@@ -4,7 +4,7 @@ export interface IjoinInfo {
 	pw: string
 	tel: string
 	gender: string
-	birthday: string
+	birthDay: string
 	address: string
 	email: string
 }

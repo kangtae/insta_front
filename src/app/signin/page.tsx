@@ -23,7 +23,6 @@ export default function SignIn(){
 		setIsModalOpen(value)
 	}
 	const handleChange = (key:string,value : string) => {
-		console.log("2222",key,value)
 		setInfo(prevInfo => ({
 			...prevInfo,
 			[key]: value
@@ -63,6 +62,7 @@ export default function SignIn(){
 				})}
 			</ul>}
 			<button type="submit">가입하기</button>
+
 		</form>
 	</div>
 }

@@ -1,68 +1,82 @@
-"use client"; // This is a client component 👈🏽
-import {SIGNGUP_STATUS} from "./constants"
-import React, {useState} from "react";
-import {SignUpItem} from "@/components/SignUpItem";
-import CommonModal from "@/components/CommonModal";
-import { postJoin } from "./lib/api";
-import {IjoinInfo} from "@/app/signin/lib/types";
+"use client"
+import { useForm } from "react-hook-form";
+import CommonInputHook from "@/components/CommonInputHook";
+import {SIGNGUP_STATUS} from "@/app/signin/constants";
 
-export default function SignIn(){
-	const [info, setInfo] = useState<IjoinInfo>({
-		name: "",
-		userId:"",
-		pw: "",
-		tel: "",
-		gender: "M",
-		birthDay: "",
-		address: "",
-		email: "",
+function SignInHookForm(){
+	const onSubmit = (data) => {
+		console.log("data", data)
+	};
+	const {
+		register,
+		handleSubmit,
+		formState: { isSubmitting, isSubmitted, errors }
+	} = useForm({
+		mode: "onSubmit",
+		defaultValues: {
+			userName: "",
+		},
+
 	});
-	const [isModalOpen, setIsModalOpen] =useState<boolean>(false)
 
-	const toggleModal = (value : boolean) => {
-		setIsModalOpen(value)
-	}
-	const handleChange = (key:string,value : string) => {
-		setInfo(prevInfo => ({
-			...prevInfo,
-			[key]: value
-		}));
-	}
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			{
+				SIGNGUP_STATUS.list.map((item, idx) =>{
+					return <CommonInputHook
+						register={register}
+						key={item.id}
+						title={item.title}
+						id={item.key}
+						type={item.type}
+						placeholder={item.placeholder}
+						validation={item.validation}
+						isSubmitted={isSubmitted}
+						errors={errors}
+					/>
+				})
+			}
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		try {
-			await postJoin(info)
-		}catch(error){
-			console.log(error);
-		}
-	}
-	return <div>
-		{isModalOpen && <CommonModal
-			toggleModal={toggleModal}
-			inputHandleChange={handleChange}
-		/>}
-		<h1>회원가입</h1>
 
-		<form onSubmit={handleSubmit}>
-			{SIGNGUP_STATUS.list && <ul>
-				{SIGNGUP_STATUS.list.map((item,idx) => {
-					return <div key={`id_${idx}`} >
-						<SignUpItem
-							title={item.title}
-							inputKey={ item.key}
-							type={item.type}
-							placeholder={item?.placeholder || ""}
-							options={item?.options || []}
-							info={info}g
-							toggleModal={toggleModal}
-							handleChange={handleChange}
-						/>
-					</div>
+{/*			<label htmlFor="email">이메일</label>
+			<input
+				id="email"
+				type="text"
+				placeholder="test@email.com"
+				aria-invalid={
+					isSubmitted ? (errors.email ? "true" : "false") : undefined
+				}
+				{...register("email", {
+					required: "이메일은 필수 입력입니다.",
+					pattern: {
+						value: /\S+@\S+\.\S+/,
+						message: "이메일 형식에 맞지 않습니다."
+					}
 				})}
-			</ul>}
-			<button type="submit">가입하기</button>
-
+			/>
+			{errors.email && <small role="alert">{errors.email.message}</small>}
+			<label htmlFor="password">비밀번호</label>
+			<input
+				id="password"
+				type="password"
+				placeholder="****************"
+				aria-invalid={
+					isSubmitted ? (errors.password ? "true" : "false") : undefined
+				}
+				{...register("password", {
+					required: "비밀번호는 필수 입력입니다.",
+					minLength: {
+						value: 8,
+						message: "8자리 이상 비밀번호를 사용하세요."
+					}
+				})}
+			/>*/}
+			{errors.password && <small role="alert">{errors.password.message}</small>}
+			<button type="submit" disabled={isSubmitting}>
+				로그인
+			</button>
 		</form>
-	</div>
+	);
 }
+
+export default SignInHookForm;

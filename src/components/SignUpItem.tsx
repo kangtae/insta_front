@@ -1,6 +1,7 @@
 import React from 'react';
 import CommonInput from "@/components/CommonInput";
 import CommonRadio from "@/components/CommonRadio";
+import CommonButton from "@/components/CommonButton";
 
 interface Props {
 	handleChange: (key: string, value: string) => void;
@@ -41,12 +42,9 @@ export const SignUpItem = (props: Props) => {
 			customStyle={`w-full h-8 mt-2 px-3 border border-[#ebebeb] ${customStyle}`}
 			disabled={inputKey === "userId" ? true : false}
 		/>
-		{inputKey === "userId" && <button
-			type="button"
-			className="mt-2 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50  sm:w-auto"
-			onClick={
-			()=>toggleModal(true)
-		}>중복 확인</button>}
+		{inputKey === "userId" && <CommonButton
+			onClick={toggleModal}
+		/>}
 	</li>
 }
 

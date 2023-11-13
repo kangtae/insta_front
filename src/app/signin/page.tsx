@@ -54,7 +54,7 @@ export default function SignIn(){
 							type={item.type}
 							placeholder={item?.placeholder || ""}
 							options={item?.options || []}
-							info={info}g
+							info={info}
 							toggleModal={toggleModal}
 							handleChange={handleChange}
 						/>

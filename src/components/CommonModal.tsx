@@ -1,32 +1,26 @@
 "use client";
 
 import CommonInput from "@/components/CommonInput";
-import { useState } from "react";
+import {useState} from "react";
 import {getMemberCheck} from "@/app/signin/lib/api";
 
-/*interface Props {
-	customStyle: string;
-	toggleModal: (value:boolean) => void;
-}*/
 
-
-export default function CommonModal({ customStyle,toggleModal,inputHandleChange }: {
+export default function CommonModal({customStyle, toggleModal, inputHandleChange}: {
 	customStyle: string;
-	toggleModal: (value:boolean) => void;
+	toggleModal: (value: boolean) => void;
 	inputHandleChange: (key: string, value: string) => void;
 }) {
 	const [id, setId] = useState<string>(""); // id 상태를 문자열로 설정
 	const [isMemberCheck, setIsMemberCheck] = useState<boolean>(false);
 	const [message, setMessage] = useState<string>("")
-	const handleChange = (key:string,value : string) => {
+	const handleChange = (key: string, value: string) => {
 		setId(value);
 	}
-
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		try {
 			const res = await getMemberCheck(id);
-			if(res.message === "success"){
+			if (res.message === "success") {
 				!isMemberCheck && setIsMemberCheck(true);
 				setMessage("사용가능한 아이디입니다.")
 				return undefined;
@@ -37,14 +31,13 @@ export default function CommonModal({ customStyle,toggleModal,inputHandleChange 
 		}
 	}
 
-	const closeModal= () => {
+	const closeModal = () => {
 		toggleModal(false)
-		inputHandleChange("userId",id);
+		inputHandleChange("userId", id);
 	}
 
 	const renderDescription = () => {
-		console.log("isMemberCheck",isMemberCheck);
-		if(isMemberCheck){
+		if (isMemberCheck) {
 			return <>
 				사용가능한 아이디입니다.
 				<button type="button" onClick={closeModal}>사용하기</button>
@@ -84,10 +77,13 @@ export default function CommonModal({ customStyle,toggleModal,inputHandleChange 
 													<button
 														className="mt-2 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50  sm:w-auto"
 														type="submit">중복확인
-													</button> {/* submit 버튼으로 변경 */}
+													</button>
+													{/* submit 버튼으로 변경 */}
 												</form>
 												{isMemberCheck && message === "사용가능한 아이디입니다."
-													? <>{message} <button type="button" onClick={closeModal}>사용하기</button></>
+													? <>{message}
+														<button type="button" onClick={closeModal}>사용하기</button>
+													</>
 													: message}
 											</div>
 										</div>
@@ -98,8 +94,6 @@ export default function CommonModal({ customStyle,toggleModal,inputHandleChange 
 					</div>
 				</div>
 			</div>
-
 		</>
-
 	);
 }

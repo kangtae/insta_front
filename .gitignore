@@ -36,3 +36,5 @@ next-env.d.ts
 
 # vsc setting
 .vscode
+
+yarn.lock

@@ -11,7 +11,7 @@
 
 
 export default function CommonInputHook(props) {
-	const {id, title, type, placeholder, validation, isSubmitted, errors, register} = props;
+	const {id, title, type, placeholder, validation, isSubmitted, errors, register, disabled} = props;
 	return <div>
 		<label htmlFor={id}>{title}</label>
 		<input
@@ -24,6 +24,7 @@ export default function CommonInputHook(props) {
 			{...register(id, {
 				validate: validation
 			})}
+			disabled={disabled || false}
 		/>
 		{errors[id] && <small role="alert">{errors[id].message}</small>}
 	</div>;

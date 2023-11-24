@@ -1,22 +1,26 @@
 "use client"
 import { useForm } from "react-hook-form";
 import CommonInputHooknp from "@/components/CommonInputHook";
-import {SIGNGUP_STATUS} from "@/app/signin/constants";
+import CommonModal from "@/components/CommonModal";
+import React, {useState} from "react";
+import CommonButton from "@/components/CommonButton";
 
 function SignInHookForm(){
+	const [isModalOpen, setIsModalOpen] =useState<boolean>(false)
+
 	const onSubmit = (data) => {
 		console.log("data", data)
 	};
 	const {
 		register,
 		handleSubmit,
+		setValue,
 		formState: { isSubmitting, isSubmitted, errors }
 	} = useForm({
 		mode: "onSubmit",
 		defaultValues: {
 			userName: "",
 		},
-
 	});
 
 	const validateName = (value) => {
@@ -34,9 +38,29 @@ function SignInHookForm(){
 		return true;
 	};
 
+	const validateId = (value) => {
+		if (!value) {
+			return '이 필드는 필수입니다.';
+		}
+		return true;
+	};
+
+	const toggleModal = (value : boolean) => {
+		console.log("333")
+		setIsModalOpen(value)
+		if(value){
+		}
+	}
+
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			{
+		<div>
+			{isModalOpen && <CommonModal
+				toggleModal={toggleModal}
+				setValue={setValue}
+			/>}
+			<h1>회원가입</h1>
+			<div className="w-[300px] mx-auto">
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<CommonInputHooknp
 						register={register}
 						title={"이름"}
@@ -47,11 +71,29 @@ function SignInHookForm(){
 						isSubmitted={isSubmitted}
 						errors={errors}
 					/>
-			}
-			<button type="submit" disabled={isSubmitting}>
-				로그인
-			</button>
-		</form>
+					<div>
+						<CommonInputHooknp
+							register={register}
+							title={"아이디"}
+							id={"userId"}
+							type={"text"}
+							disabled={true}
+							placeholder={"아이디를 입력해주세요"}
+							validation={validateId}
+							isSubmitted={isSubmitted}
+							errors={errors}
+						/>
+						<CommonButton
+							toggleModal={toggleModal}
+						/>
+					</div>
+
+					<button type="submit" disabled={isSubmitting}>
+						로그인
+					</button>
+				</form>
+			</div>
+		</div>
 	);
 }
 

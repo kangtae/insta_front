@@ -5,10 +5,11 @@ import {useState} from "react";
 import {getMemberCheck} from "@/app/signin/lib/api";
 
 
-export default function CommonModal({customStyle, toggleModal, inputHandleChange}: {
+export default function CommonModal({customStyle, toggleModal, setValue}: {
 	customStyle: string;
 	toggleModal: (value: boolean) => void;
 	inputHandleChange: (key: string, value: string) => void;
+	setValue
 }) {
 	const [id, setId] = useState<string>(""); // id 상태를 문자열로 설정
 	const [isMemberCheck, setIsMemberCheck] = useState<boolean>(false);
@@ -33,7 +34,7 @@ export default function CommonModal({customStyle, toggleModal, inputHandleChange
 
 	const closeModal = () => {
 		toggleModal(false)
-		inputHandleChange("userId", id);
+		setValue("userId", id);
 	}
 
 	const renderDescription = () => {

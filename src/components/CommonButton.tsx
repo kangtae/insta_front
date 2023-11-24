@@ -2,7 +2,7 @@
 import React from "react";
 
 interface Props {
-	onClick: (e: boolean) => void;
+	onClick: (value: boolean) => void;
 }
 
 

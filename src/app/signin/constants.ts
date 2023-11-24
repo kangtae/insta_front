@@ -15,15 +15,19 @@ const SIGNGUP_STATUS = {
 				maxLength: { value: 5, message: '이름은 5자 이하이어야 합니다.' },
 			},
 		},
-/*		{
+		{
 			id: 2,
 			title : "아이디",
 			key: "userId",
 			type: "text",
 			placeholder: "아이디를 입력해주세요",
 			errorMessage: "형식에 맞지 않습니다.",
-			required:"필수 입력입니다."
-		},*/
+			required:"필수 입력입니다.",
+			validation: {
+				required: " 6~15 자 숫자와 영문으로 조합",
+				validate: { value: 2, message: '이름은 2자 이상이어야 합니다.' },
+			},
+		},
 		/*{
 			id: 3,
 			title : "패스워드",
